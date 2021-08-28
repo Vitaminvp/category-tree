@@ -1,0 +1,75 @@
+#root {
+  .list {
+    transition: all 0.3s ease-in-out;
+
+    &-item {
+      display: block;
+      position: relative;
+      font-weight: 600;
+      font-size: 2.25rem;
+      line-height: 1.95;
+      margin-left: 50px;
+      padding-left: 20px;
+      zoom: 1;
+      background-image: url(../img/i.gif);
+      background-position: top left;
+      background-repeat: repeat-y;
+
+      svg {
+        height: 2rem;
+        width: 2rem;
+        cursor: pointer;
+      }
+
+      &-add {
+        fill: $color-primary;
+      }
+
+      &-delete {
+        fill: $color-secondary;
+      }
+
+      &-edit {
+        fill: $color-third;
+      }
+    }
+
+    &-item:before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      content: url(../img/expand_leaf.gif);
+    }
+
+    &-item.has-children:before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      content: url(../img/expand_minus.gif);
+    }
+
+    &-item.has-children.closed:before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      content: url(../img/expand_plus.gif);
+    }
+
+    &-item.has-children > .list-item-toggle {
+      cursor: pointer;
+    }
+
+    &-item.last-child {
+      background-image: url(../img/i.gif);
+      background-repeat: no-repeat;
+    }
+
+    &-item .Container {
+      display: block;
+    }
+
+    &-item.closed .list {
+      display: none;
+    }
+  }
+}
