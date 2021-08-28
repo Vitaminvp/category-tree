@@ -1,0 +1,12 @@
+#create {
+  .add-list {
+    text-align: center;
+
+    svg {
+      height: 5rem;
+      width: 5rem;
+      cursor: pointer;
+      fill: $color-primary;
+    }
+  }
+}

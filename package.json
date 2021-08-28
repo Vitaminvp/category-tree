@@ -1,0 +1,28 @@
+{
+  "name": "wix",
+  "version": "1.0.0",
+  "description": "Category Tree",
+  "default": "index.html",
+  "scripts": {
+    "lint": "npx eslint --cache src/**/*.js",
+    "prettify": "npx prettier --write \"**/*.js\"",
+    "start": "parcel ./index.html",
+    "build": "parcel build index.html --dist-dir ./dist",
+    "test": "jest"
+  },
+  "author": "Vitalii Ovcharenko",
+  "license": "ISC",
+  "dependencies": {
+    "prettier": "^2.3.2"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.15.0",
+    "@parcel/transformer-image": "^2.0.0-rc.0",
+    "@parcel/transformer-sass": "^2.0.0-rc.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-prettier": "^3.4.1",
+    "jest": "^27.1.0",
+    "parcel": "^2.0.0-rc.0",
+    "sass": "^1.38.1"
+  }
+}
