@@ -1,30 +1,31 @@
 import { getUnId, isNotDefined } from '../helpers';
 import * as model from '../model';
-import { DEFAULT_NAME, ENTER_NAME, ERR_EMPTY_STR } from '../config';
+import { CREATE, DEFAULT_NAME } from '../config';
 import treeView from '../views/treeView';
 import { controlRender } from './controlRender';
+import modalView from '../views/modalView';
 
 export const controlAddFirst = function () {
   try {
-    const name = prompt(ENTER_NAME, DEFAULT_NAME);
-
-    if (isNotDefined(name)) return;
-
-    if (name.length === 0) {
-      alert(ERR_EMPTY_STR);
-      return controlAddFirst();
-    }
-
-    const newItem = {
-      id: getUnId(),
-      name,
-    };
-
-    model.state.push(newItem);
-
-    controlRender();
+    modalView.showModalHandler({
+      title: CREATE,
+      defaultValue: DEFAULT_NAME,
+      handler: addNewItem,
+    });
   } catch (err) {
-    treeView.renderError();
-    console.error(err);
+    treeView.renderError(err);
   }
+};
+
+const addNewItem = name => {
+  if (isNotDefined(name)) return;
+
+  const category = {
+    id: getUnId(),
+    name,
+  };
+
+  model.state.push(category);
+
+  controlRender();
 };

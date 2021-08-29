@@ -1,24 +1,33 @@
 import icons from 'url:../../img/icons.svg';
 import View from './view';
 
+const listClass = {
+  child: 'list-item-child',
+  delete: 'list-item-delete',
+  add: 'list-item-add',
+  edit: 'list-item-edit',
+  toggle: 'list-item-toggle',
+};
+
 class TreeView extends View {
   _parentElement = document.getElementById('root');
 
-  _generateIcons(id) {
+  _generateListContent(id, name) {
     return `
-      <span title="Delete item">
-        <svg class="list-item-child list-item-delete" data-id="${id}">
-          <use href="${icons}#icon-minus-circle"></use>
+      <span class="${listClass.child} ${listClass.toggle}" data-id="${id}">${name}</span>
+      <span title="Delete item" class="${listClass.child} ${listClass.delete}" data-id="${id}">
+        <svg>
+          <use href="${icons}#icon-minus-circle"/>
         </svg>
       </span>
-      <span title="Add item">
-        <svg class="list-item-child list-item-add" data-id="${id}">
-          <use href="${icons}#icon-plus-circle"></use>
+      <span title="Add item" class="${listClass.child} ${listClass.add}" data-id="${id}">
+        <svg>
+          <use href="${icons}#icon-plus-circle"/>
         </svg>
       </span>
-      <span title="Edit item">
-        <svg class="list-item-child list-item-edit" data-id="${id}">
-          <use href="${icons}#icon-edit"></use>
+      <span title="Edit item" class="${listClass.child} ${listClass.edit}" data-id="${id}">
+        <svg>
+          <use href="${icons}#icon-edit"/>
         </svg>
       </span>
     `;
@@ -34,16 +43,14 @@ class TreeView extends View {
             if (children && children.length) {
               return `
                 <li class="list-item has-children ${closed ? 'closed' : ''} ${lastChild}">
-                  <span class="list-item-child list-item-toggle" data-id="${id}">${name}</span>
-                  ${this._generateIcons(id)}
+                  ${this._generateListContent(id, name)}
                   ${this._generateMarkup(children)}
                 </li>`;
             }
 
             return `
               <li class="list-item ${lastChild}">
-                <span class="list-item-child list-item-toggle" data-id="${id}">${name}</span>
-                ${this._generateIcons(id)}
+                ${this._generateListContent(id, name)}
               </li>`;
           })
           .join('')}
@@ -58,16 +65,16 @@ class TreeView extends View {
 
   addClickHandler(addHandler, removeHandler, editHandler, toggleHandler) {
     this._parentElement.addEventListener('click', function (e) {
-      const child = e.target.closest('.list-item-child');
+      const child = e.target.closest(`.${listClass.child}`);
 
       if (!child) return;
 
       const id = child.dataset.id;
 
-      if (child.classList.contains('list-item-add')) return addHandler(id);
-      if (child.classList.contains('list-item-delete')) return removeHandler(id);
-      if (child.classList.contains('list-item-edit')) return editHandler(id);
-      if (child.classList.contains('list-item-toggle')) return toggleHandler(id);
+      if (child.classList.contains(listClass.add)) return addHandler(id);
+      if (child.classList.contains(listClass.delete)) return removeHandler(id);
+      if (child.classList.contains(listClass.edit)) return editHandler(id);
+      if (child.classList.contains(listClass.toggle)) return toggleHandler(id);
     });
   }
 }

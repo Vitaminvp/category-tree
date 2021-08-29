@@ -1,4 +1,5 @@
 import { STORAGE_KEY } from './config';
+import { getFromStorage, saveToStorage } from './helpers';
 
 export let state = [
   {
@@ -47,14 +48,10 @@ export let state = [
   },
 ];
 
-export const persistTree = function () {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-};
+export const manageStorage = () => {
+  const storage = getFromStorage(STORAGE_KEY);
 
-export const manageStorage = function () {
-  const storage = localStorage.getItem(STORAGE_KEY);
+  if (storage) state = storage;
 
-  if (storage) state = JSON.parse(storage);
-
-  window.addEventListener('beforeunload', persistTree);
+  window.addEventListener('beforeunload', () => saveToStorage(STORAGE_KEY, state));
 };

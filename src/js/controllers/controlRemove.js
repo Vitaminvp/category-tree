@@ -11,7 +11,6 @@ export const controlRemove = function (id) {
 
     controlRender();
   } catch (err) {
-    treeView.renderError();
-    console.error(err);
+    treeView.renderError(err);
   }
 };
