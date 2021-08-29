@@ -72,4 +72,9 @@
       display: none;
     }
   }
+
+  & > ul.list > li.list-item {
+    background-image: none;
+  }
+
 }

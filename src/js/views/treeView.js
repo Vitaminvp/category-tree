@@ -6,15 +6,21 @@ class TreeView extends View {
 
   _generateIcons(id) {
     return `
-      <svg class="list-item-child list-item-delete" data-id="${id}">
-        <use href="${icons}#icon-minus-circle"></use>
-      </svg>
-      <svg class="list-item-child list-item-add" data-id="${id}">
-        <use href="${icons}#icon-plus-circle"></use>
-      </svg>
-      <svg class="list-item-child list-item-edit" data-id="${id}">
-        <use href="${icons}#icon-edit"></use>
-      </svg>
+      <span title="Delete item">
+        <svg class="list-item-child list-item-delete" data-id="${id}">
+          <use href="${icons}#icon-minus-circle"></use>
+        </svg>
+      </span>
+      <span title="Add item">
+        <svg class="list-item-child list-item-add" data-id="${id}">
+          <use href="${icons}#icon-plus-circle"></use>
+        </svg>
+      </span>
+      <span title="Edit item">
+        <svg class="list-item-child list-item-edit" data-id="${id}">
+          <use href="${icons}#icon-edit"></use>
+        </svg>
+      </span>
     `;
   }
 

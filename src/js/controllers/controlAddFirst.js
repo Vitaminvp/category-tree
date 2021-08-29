@@ -1,12 +1,12 @@
 import { getUnId, isNotDefined } from '../helpers';
 import * as model from '../model';
-import { ENTER_NAME, ERR_EMPTY_STR } from '../config';
+import { DEFAULT_NAME, ENTER_NAME, ERR_EMPTY_STR } from '../config';
 import treeView from '../views/treeView';
 import { controlRender } from './controlRender';
 
 export const controlAddFirst = function () {
   try {
-    const name = prompt(ENTER_NAME);
+    const name = prompt(ENTER_NAME, DEFAULT_NAME);
 
     if (isNotDefined(name)) return;
 
