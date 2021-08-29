@@ -1,4 +1,11 @@
-import { findListItem, getUnId, isNotDefined, isZeroLength } from './helpers';
+import {
+  findListItem,
+  getFromStorage,
+  getUnId,
+  isNotDefined,
+  isZeroLength,
+  saveToStorage,
+} from './helpers';
 
 describe('Helper functions:', () => {
   beforeEach(() => {
@@ -89,26 +96,27 @@ describe('Helper functions:', () => {
 
     expect(result).toEqual(expected);
   });
-});
 
-// export const findListItem = (store, itemId) => {
-//   let result = {};
-//
-//   const findObj = (list, result) => {
-//     for (let i = 0; i < list.length; i++) {
-//       const current = list[i];
-//       const { id, children } = current;
-//
-//       if (id === itemId) {
-//         result.list = list;
-//         result.idx = i;
-//         return result;
-//       }
-//       if (children && children.length) findObj(children, result);
-//     }
-//   };
-//
-//   findObj(store, result);
-//
-//   return result;
-// };
+  test('saveToStorage', () => {
+    jest.spyOn(window.localStorage.__proto__, 'setItem');
+    window.localStorage.__proto__.setItem = jest.fn();
+
+    const key = 'key';
+    const value = {};
+
+    saveToStorage(key, value);
+
+    expect(localStorage.setItem).toHaveBeenCalledWith(key, '{}');
+  });
+
+  test('getFromStorage', () => {
+    jest.spyOn(window.localStorage.__proto__, 'getItem');
+    window.localStorage.__proto__.getItem = jest.fn();
+
+    const key = 'key';
+
+    getFromStorage(key);
+
+    expect(localStorage.getItem).toHaveBeenCalledWith(key);
+  });
+});

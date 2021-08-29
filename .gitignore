@@ -22,3 +22,4 @@ Thumbs.db
 ._*
 tmp/
 .parcel-cache
+coverage

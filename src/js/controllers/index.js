@@ -14,7 +14,6 @@ if (module.hot) {
 
 const init = function () {
   model.manageStorage();
-
   treeView.addRenderHandler(controlRender);
   emptyListView.addClickHandler(controlAddFirst);
   treeView.addClickHandler(controlAdd, controlRemove, controlEdit, controlToggle);

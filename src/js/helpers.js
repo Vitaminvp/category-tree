@@ -25,3 +25,23 @@ export const isNotDefined = value => value == null;
 export const isZeroLength = str => str.length === 0;
 
 export const getUnId = () => Math.random().toString(16).slice(2);
+
+export const saveToStorage = (key, value) => {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (err) {
+    console.warn(err);
+  }
+};
+
+export const getFromStorage = key => {
+  try {
+    const result = localStorage.getItem(key);
+
+    return JSON.parse(result);
+  } catch (err) {
+    console.warn(err);
+
+    return null;
+  }
+};
