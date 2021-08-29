@@ -5,7 +5,7 @@
   "default": "index.html",
   "scripts": {
     "lint": "npx eslint --cache src/**/*.js",
-    "prettify": "npx prettier --write \"**/*.js\"",
+    "prettify": "npx prettier --write \"src/**/*.js\"",
     "start": "parcel ./index.html",
     "build": "parcel build index.html --dist-dir ./dist",
     "test": "jest"

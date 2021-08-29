@@ -1,5 +1,8 @@
 export const ERR_EMPTY_STR = 'Please, enter at least one symbol';
 export const ENTER_NAME = 'Please, enter name.';
+export const ADD_ITEM = 'Add category';
+export const EDIT_ITEM = 'Edit category';
+export const CREATE = 'Create category tree';
 export const ENTER_NEW_NAME = 'Please, enter new name.';
 export const STORAGE_KEY = 'categoryTree';
 export const ERR_MESSAGE = 'Please try again!';

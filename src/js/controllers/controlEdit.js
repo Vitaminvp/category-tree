@@ -1,23 +1,29 @@
-import { findListItem, isNotDefined } from '../helpers';
 import * as model from '../model';
-import { ENTER_NEW_NAME, ERR_EMPTY_STR } from '../config';
+import { findListItem, isNotDefined } from '../helpers';
+import { EDIT_ITEM } from '../config';
 import treeView from '../views/treeView';
 import { controlRender } from './controlRender';
+import modalView from '../views/modalView';
 
 export const controlEdit = function (id) {
   try {
     const { list, idx } = findListItem(model.state, id);
-    const newName = prompt(ENTER_NEW_NAME, list[idx].name);
+    const current = list[idx];
 
-    if (isNotDefined(newName)) return;
-
-    if (newName.length === 0) return alert(ERR_EMPTY_STR);
-
-    list[idx].name = newName;
-
-    controlRender();
+    modalView.showModalHandler({
+      title: EDIT_ITEM,
+      defaultValue: current.name,
+      handler: editItem(current),
+    });
   } catch (err) {
-    treeView.renderError();
-    console.error(err);
+    treeView.renderError(err);
   }
+};
+
+const editItem = currentItem => name => {
+  if (isNotDefined(name)) return;
+
+  currentItem.name = name;
+
+  controlRender();
 };

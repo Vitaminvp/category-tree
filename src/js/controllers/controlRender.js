@@ -13,7 +13,6 @@ export const controlRender = function () {
 
     treeView.render(model.state);
   } catch (err) {
-    treeView.renderError();
-    console.error(err);
+    treeView.renderError(err);
   }
 };
