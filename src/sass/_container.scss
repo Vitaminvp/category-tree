@@ -3,22 +3,22 @@
     transition: all 0.3s ease-in-out;
 
     &-item {
+      background-image: url(../img/i.gif);
+      background-position: top left;
+      background-repeat: repeat-y;
       display: block;
+      padding-left: 20px;
       position: relative;
       font-weight: 600;
       font-size: 2.25rem;
       line-height: 1.95;
       margin-left: 50px;
-      padding-left: 20px;
       zoom: 1;
-      background-image: url(../img/i.gif);
-      background-position: top left;
-      background-repeat: repeat-y;
 
       svg {
+        cursor: pointer;
         height: 2rem;
         width: 2rem;
-        cursor: pointer;
       }
 
       &-add {
@@ -35,24 +35,24 @@
     }
 
     &-item:before {
-      position: absolute;
-      left: 0;
-      top: 0;
       content: url(../img/expand_leaf.gif);
+      left: 0;
+      position: absolute;
+      top: 0;
     }
 
     &-item.has-children:before {
-      position: absolute;
-      left: 0;
-      top: 0;
       content: url(../img/expand_minus.gif);
+      left: 0;
+      position: absolute;
+      top: 0;
     }
 
     &-item.has-children.closed:before {
-      position: absolute;
-      left: 0;
-      top: 0;
       content: url(../img/expand_plus.gif);
+      left: 0;
+      position: absolute;
+      top: 0;
     }
 
     &-item.has-children > .list-item-toggle {

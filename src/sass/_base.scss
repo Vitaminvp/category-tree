@@ -38,55 +38,55 @@ html {
 }
 
 body {
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 400;
-  line-height: 1.6;
-  color: $color-grey-dark-1;
   background-image: $gradient;
   background-size: cover;
   background-repeat: no-repeat;
+  color: $color-grey-dark-1;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
   min-height: 100vh;
 }
 
 .container {
-  max-width: 120rem;
-  min-height: 80rem;
-  margin: 4vw auto;
   background-color: #fff;
-  border-radius: 9px;
-  overflow: hidden;
-  box-shadow: 0 2rem 6rem 0.5rem rgba($color-grey-dark-1, 0.7);
   background-image: url(../img/trees.gif);
-  background-position: bottom right;
   background-repeat: no-repeat;
+  background-position: bottom right;
   background-size: 35%;
+  border-radius: 9px;
+  box-shadow: 0 2rem 6rem 0.5rem rgba($color-grey-dark-1, 0.7);
   display: flex;
   flex-direction: column;
+  margin: 4vw auto;
+  max-width: 120rem;
+  min-height: 80rem;
+  overflow: hidden;
 
   @media only screen and (max-width: $bp-large) {
-    max-width: 100%;
-    margin: 0;
     border-radius: 0;
+    margin: 0;
+    max-width: 100%;
   }
 }
 
 .error {
-  max-width: 50rem;
-  margin: 0 auto;
-  padding: 5rem 4rem;
   display: flex;
+  padding: 5rem 4rem;
+  margin: 0 auto;
+  max-width: 50rem;
 
   svg {
-    height: 10rem;
-    width: 10rem;
     fill: $color-secondary;
+    height: 10rem;
     transform: translateY(-0.3rem);
+    width: 10rem;
   }
 
   p {
-    margin-left: 1.5rem;
     font-size: 2.8rem;
-    line-height: 1.5;
     font-weight: 600;
+    line-height: 1.5;
+    margin-left: 1.5rem;
   }
 }

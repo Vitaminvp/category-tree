@@ -33,9 +33,9 @@
     "jest": "^27.1.0",
     "lint-staged": "^11.1.2",
     "parcel": "^2.0.0-rc.0",
+    "prettier": "^2.3.2",
     "sass": "^1.38.1",
-    "shx": "^0.3.3",
-    "prettier": "^2.3.2"
+    "shx": "^0.3.3"
   },
   "browserslist": [
     "since 2021-01"
