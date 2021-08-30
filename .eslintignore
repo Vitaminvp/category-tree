@@ -2,3 +2,9 @@ src/img
 .parcel-cache
 dist
 coverage
+public
+.vercel
+**/*.js.map
+workbox-*d.js
+sw.js
+README.md

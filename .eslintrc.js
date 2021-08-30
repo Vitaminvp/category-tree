@@ -6,6 +6,7 @@ module.exports = {
   },
   extends: [],
   plugins: ['prettier'],
+  parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaVersion: 6,
     sourceType: 'module',

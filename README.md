@@ -1,13 +1,20 @@
 # Category-Tree
+
 [https://category-tree.app](https://category-tree-hv9gxsdrs-vitamin4ik.vercel.app/)
+
 ## Save (and Load) this Category-Tree in LocalStorage
-- Save on event  `beforeunload`, load then app starts.
-##  Testing
+
+- Save on event `beforeunload`, load then app starts.
+
+## Testing
+
 - add **jest** to project
 
 ## Deployment
+
 - Used pre-commit git hook to generate new Service Worker before each commit.
-- Add **.git/hooks/pre-commit** file 
+- Add **.git/hooks/pre-commit** file
+
 ```js
 #!/bin/sh
 if workbox generateSW workbox-config.js ; then
@@ -18,9 +25,11 @@ else
   echo "Aborting"
 fi
 ```
+
 - Add a webhook by setting up a basic CI/CD process using [Travis CI](https://travis-ci.org/) and [AWS](https://aws.amazon.com/)
 - Through [AWS Console](https://console.aws.amazon.com/console/home) S3 service, create two buckets for staging (develop branch) and production (main branch)
 - Create **.travis.yml**.
+
 ```js
 language: node_js
 node_js:
@@ -48,5 +57,6 @@ deploy:
     on:
       branch: main
 ```
+
 - integrate with [Zeit Now](https://vercel.com/)
 - add **now.json** and run `sudo npm install --global --unsafe-perm now`

@@ -23,5 +23,7 @@ Thumbs.db
 tmp/
 .parcel-cache
 coverage
-
+public
 .vercel
+**/*.js.map
+workbox-*d.js
