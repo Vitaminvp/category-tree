@@ -10,15 +10,14 @@ class ModalView extends View {
 
   constructor() {
     super();
-    this._toggleModal = this._toggleModal.bind(this);
     this._hideModalHandler();
     this.submitHandler();
   }
 
-  _toggleModal() {
+  _toggleModal = () => {
     this._overlay.classList.toggle('hidden');
     this._window.classList.toggle('hidden');
-  }
+  };
 
   showModalHandler(data) {
     this._toggleModal();
@@ -34,11 +33,10 @@ class ModalView extends View {
     this._parentElement.addEventListener('submit', e => {
       e.preventDefault();
 
-      const name = this._parentElement.elements[0].value;
-
-      this._data.handler(name);
+      const [{ value }] = this._parentElement.elements;
 
       this._toggleModal();
+      this._data.handler(value);
     });
   }
 

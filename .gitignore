@@ -23,3 +23,5 @@ Thumbs.db
 tmp/
 .parcel-cache
 coverage
+
+.vercel
