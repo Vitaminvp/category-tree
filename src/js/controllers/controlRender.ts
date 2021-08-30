@@ -1,0 +1,17 @@
+import { treeView, emptyListView } from "../views";
+import * as model from "../model";
+import { isZeroLength } from "../helpers";
+
+export const controlRender = (): void => {
+  try {
+    if (isZeroLength(model.state)) {
+      emptyListView.render(model.state);
+    } else {
+      emptyListView.clear();
+    }
+
+    treeView.render(model.state);
+  } catch (err) {
+    treeView.renderError(err as string);
+  }
+};

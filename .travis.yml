@@ -3,7 +3,7 @@ node_js:
   - 11.13.0
 script:
   - npm install --global workbox-cli
-  - workbox generateSW workbox-config.js
+  - workbox generateSW workbox-config.ts
 deploy:
   - provider: s3
     skip_cleanup: true

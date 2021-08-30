@@ -1,12 +1,12 @@
 %btn {
+  align-items: center;
   background-image: $gradient;
   border-radius: 10rem;
   border: none;
-  text-transform: uppercase;
   color: #fff;
   cursor: pointer;
   display: flex;
-  align-items: center;
+  text-transform: uppercase;
   transition: all 0.2s;
 
   &:hover {
@@ -24,15 +24,14 @@
 
 .btn {
   @extend %btn;
-
   padding: 1.5rem 4rem;
   font-size: 1.5rem;
   font-weight: 600;
 
   svg {
     height: 2.25rem;
-    width: 2.25rem;
     fill: currentColor;
+    width: 2.25rem;
   }
 }
 
@@ -42,38 +41,37 @@
   &:visited {
     @extend %btn;
 
+    padding: 1.25rem 2.25rem;
     font-size: 1.4rem;
     font-weight: 600;
-    padding: 1.25rem 2.25rem;
     text-decoration: none;
 
     svg {
+      fill: currentColor;
       height: 1.75rem;
       width: 1.75rem;
-      fill: currentColor;
     }
   }
 }
 
 .btn--inline {
+  background-color: $color-grey-light-1;
+  border: none;
+  border-radius: 10rem;
   color: $color-primary;
+  cursor: pointer;
   font-size: 1.3rem;
   font-weight: 600;
-  border: none;
-  background-color: $color-grey-light-1;
   padding: 0.8rem 1.2rem;
-  border-radius: 10rem;
-  cursor: pointer;
-
-  display: flex;
   align-items: center;
+  display: flex;
   transition: all 0.2s;
 
   svg {
-    height: 1.6rem;
-    width: 1.6rem;
     fill: currentColor;
+    height: 1.6rem;
     margin: 0 0.2rem;
+    width: 1.6rem;
   }
 
   span {
@@ -81,8 +79,8 @@
   }
 
   &:hover {
-    color: $color-grad-2;
     background-color: $color-grey-light-2;
+    color: $color-grad-2;
   }
 
   &:focus {
@@ -91,18 +89,16 @@
 }
 
 .btn--round {
+  align-items: center;
   background-image: $gradient;
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  height: 4.5rem;
-  width: 4.5rem;
-  // margin-left: auto;
-  transition: all 0.2s;
-
   display: flex;
-  align-items: center;
+  height: 4.5rem;
   justify-content: center;
+  transition: all 0.2s;
+  width: 4.5rem;
 
   &:hover {
     transform: scale(1.07);
@@ -113,24 +109,24 @@
   }
 
   svg {
+    fill: #fff;
     height: 2.5rem;
     width: 2.5rem;
-    fill: #fff;
   }
 }
 
 .btn--tiny {
-  height: 2rem;
-  width: 2rem;
   border: none;
   background: none;
   cursor: pointer;
+  height: 2rem;
+  width: 2rem;
 
   svg {
-    height: 100%;
-    width: 100%;
     fill: $color-primary;
+    height: 100%;
     transition: all 0.3s;
+    width: 100%;
   }
 
   &:focus {

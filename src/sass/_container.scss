@@ -1,24 +1,26 @@
 #root {
+  overflow-y: scroll;
+
   .list {
     transition: all 0.3s ease-in-out;
 
     &-item {
+      background-image: url(../img/i.gif);
+      background-position: top 1px left;
+      background-repeat: repeat-y;
       display: block;
+      padding-left: 20px;
       position: relative;
       font-weight: 600;
       font-size: 2.25rem;
       line-height: 1.95;
       margin-left: 50px;
-      padding-left: 20px;
       zoom: 1;
-      background-image: url(../img/i.gif);
-      background-position: top left;
-      background-repeat: repeat-y;
 
       svg {
+        cursor: pointer;
         height: 2rem;
         width: 2rem;
-        cursor: pointer;
       }
 
       &-add {
@@ -35,41 +37,55 @@
     }
 
     &-item:before {
-      position: absolute;
-      left: 0;
-      top: 0;
       content: url(../img/expand_leaf.gif);
+      left: 0;
+      position: absolute;
+      top: 0;
     }
 
     &-item.has-children:before {
-      position: absolute;
-      left: 0;
-      top: 0;
       content: url(../img/expand_minus.gif);
+      left: 0;
+      position: absolute;
+      top: 0;
     }
 
     &-item.has-children.closed:before {
-      position: absolute;
-      left: 0;
-      top: 0;
       content: url(../img/expand_plus.gif);
+      left: 0;
+      position: absolute;
+      top: 0;
     }
 
     &-item.has-children > .list-item-toggle {
       cursor: pointer;
     }
 
-    &-item.last-child {
+    &-item:last-child {
       background-image: url(../img/i.gif);
       background-repeat: no-repeat;
     }
 
-    &-item .Container {
+    &-item .list-item-child {
+      white-space: nowrap;
+    }
+
+    &-item {
       display: block;
+
+      .list {
+        position: relative;
+      }
+    }
+
+    &-item .list {
+      opacity: 1;
+      animation: appear 0.2s linear forwards;
     }
 
     &-item.closed .list {
-      display: none;
+      opacity: 0;
+      animation: disappear 0.2s linear forwards;
     }
   }
 
@@ -77,4 +93,64 @@
     background-image: none;
   }
 
+  @media only screen and (max-width: $bp-medium) {
+    font-size: 50%;
+
+    .list-item:before {
+      top: 2px;
+    }
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    font-size: 30%;
+
+    .list-item {
+      background-position: top -3px left;
+      margin-left: 25px;
+
+      .list-item-child {
+        vertical-align: text-top;
+      }
+
+      &:before {
+        top: 4px;
+      }
+
+      &.has-children:before {
+        top: 3px;
+      }
+
+      &.has-children.closed:before {
+        top: 3px;
+      }
+    }
+  }
+}
+
+@keyframes disappear {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+    height: 0;
+  }
+}
+
+@keyframes appear {
+  100% {
+    opacity: 1;
+    height: 100%;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  0% {
+    opacity: 0;
+    height: 0;
+  }
 }

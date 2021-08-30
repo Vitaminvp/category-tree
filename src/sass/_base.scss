@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap');
+
 $color-primary: #79ff00;
 $color-secondary: #e83b3b;
 $color-third: #5779e8;
 $color-grad-1: #fbdb89;
-$color-grad-2: #727dea;
+$color-grad-2: #ff9000;
 
 $color-grey-light-1: #f9f5f3; // Light background
 $color-grey-light-2: #f2efee; // Light lines
@@ -35,58 +37,62 @@ html {
   @media only screen and (max-width: $bp-medium) {
     font-size: 50%;
   }
+
+  @media only screen and (max-width: $bp-small) {
+    font-size: 30%;
+  }
 }
 
 body {
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 400;
-  line-height: 1.6;
-  color: $color-grey-dark-1;
   background-image: $gradient;
   background-size: cover;
   background-repeat: no-repeat;
+  color: $color-grey-dark-1;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
   min-height: 100vh;
 }
 
 .container {
-  max-width: 120rem;
-  min-height: 80rem;
-  margin: 4vw auto;
   background-color: #fff;
-  border-radius: 9px;
-  overflow: hidden;
-  box-shadow: 0 2rem 6rem 0.5rem rgba($color-grey-dark-1, 0.7);
   background-image: url(../img/trees.gif);
-  background-position: bottom right;
   background-repeat: no-repeat;
-  background-size: 35%;
+  background-position: bottom right;
+  background-size: 25%;
+  border-radius: 9px;
+  box-shadow: 0 2rem 6rem 0.5rem rgba($color-grey-dark-1, 0.7);
   display: flex;
   flex-direction: column;
+  margin: 4vw auto;
+  max-width: 120rem;
+  min-height: 76rem;
+  overflow: hidden;
 
   @media only screen and (max-width: $bp-large) {
-    max-width: 100%;
-    margin: 0;
     border-radius: 0;
+    margin: 0;
+    max-width: 100%;
   }
 }
 
 .error {
-  max-width: 50rem;
-  margin: 0 auto;
-  padding: 5rem 4rem;
   display: flex;
+  padding: 5rem 4rem;
+  margin: 0 auto;
+  max-width: 50rem;
 
   svg {
-    height: 10rem;
-    width: 10rem;
     fill: $color-secondary;
+    height: 10rem;
     transform: translateY(-0.3rem);
+    width: 10rem;
   }
 
   p {
-    margin-left: 1.5rem;
     font-size: 2.8rem;
-    line-height: 1.5;
     font-weight: 600;
+    line-height: 1.5;
+    margin-left: 1.5rem;
   }
 }
