@@ -1,5 +1,4 @@
-import treeView from '../views/treeView';
-import emptyListView from '../views/emptyListView';
+import { treeView, emptyListView } from '../views';
 import * as model from '../model';
 import { isZeroLength } from '../helpers';
 

@@ -20,7 +20,7 @@ class EmptyListView extends View {
     return `
       <div class="add-list">
         <svg class="add-list-btn">
-          <use href="${icons}#icon-plus-circle"></use>
+          <use href="${icons}#icon-plus-circle"/>
         </svg>
       </div>
       `;

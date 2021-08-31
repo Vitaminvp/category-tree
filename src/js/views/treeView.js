@@ -38,18 +38,16 @@ class TreeView extends View {
       <ul class="list">
         ${data
           .map(({ children, id, name, closed }, idx) => {
-            const lastChild = data.length - 1 === idx ? 'last-child' : '';
-
             if (children && children.length) {
               return `
-                <li class="list-item has-children ${closed ? 'closed' : ''} ${lastChild}">
+                <li class="list-item has-children ${closed ? 'closed' : 'opened'}">
                   ${this._generateListContent(id, name)}
                   ${this._generateMarkup(children)}
                 </li>`;
             }
 
             return `
-              <li class="list-item ${lastChild}">
+              <li class="list-item">
                 ${this._generateListContent(id, name)}
               </li>`;
           })

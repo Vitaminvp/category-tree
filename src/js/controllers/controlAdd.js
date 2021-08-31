@@ -1,9 +1,7 @@
 import { findListItem, getUnId, isNotDefined } from '../helpers';
 import * as model from '../model';
 import { ADD_ITEM } from '../config';
-import treeView from '../views/treeView';
-import { controlRender } from './controlRender';
-import modalView from '../views/modalView';
+import { treeView, modalView } from '../views';
 
 export const controlAdd = function (id) {
   try {
@@ -21,16 +19,20 @@ export const controlAdd = function (id) {
 };
 
 const addItem = currentItem => name => {
-  if (isNotDefined(name)) return;
+  try {
+    if (isNotDefined(name)) return;
 
-  const childrenList = currentItem.children;
-  const newItem = {
-    id: getUnId(),
-    name,
-  };
+    const childrenList = currentItem.children;
+    const newItem = {
+      id: getUnId(),
+      name,
+    };
 
-  currentItem.children = childrenList ? [...childrenList, newItem] : [newItem];
-  currentItem.closed = false;
+    currentItem.children = childrenList ? [...childrenList, newItem] : [newItem];
+    currentItem.closed = false;
 
-  controlRender();
+    treeView.render(model.state);
+  } catch (err) {
+    throw err;
+  }
 };

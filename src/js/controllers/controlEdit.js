@@ -1,9 +1,7 @@
 import * as model from '../model';
 import { findListItem, isNotDefined } from '../helpers';
 import { EDIT_ITEM } from '../config';
-import treeView from '../views/treeView';
-import { controlRender } from './controlRender';
-import modalView from '../views/modalView';
+import { treeView, modalView } from '../views';
 
 export const controlEdit = function (id) {
   try {
@@ -21,9 +19,13 @@ export const controlEdit = function (id) {
 };
 
 const editItem = currentItem => name => {
-  if (isNotDefined(name)) return;
+  try {
+    if (isNotDefined(name)) return;
 
-  currentItem.name = name;
+    currentItem.name = name;
 
-  controlRender();
+    treeView.update(model.state);
+  } catch (err) {
+    throw err;
+  }
 };

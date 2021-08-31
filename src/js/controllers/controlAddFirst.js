@@ -1,9 +1,8 @@
 import { getUnId, isNotDefined } from '../helpers';
 import * as model from '../model';
 import { CREATE, DEFAULT_NAME } from '../config';
-import treeView from '../views/treeView';
+import { treeView, modalView } from '../views';
 import { controlRender } from './controlRender';
-import modalView from '../views/modalView';
 
 export const controlAddFirst = function () {
   try {
@@ -18,14 +17,18 @@ export const controlAddFirst = function () {
 };
 
 const addNewItem = name => {
-  if (isNotDefined(name)) return;
+  try {
+    if (isNotDefined(name)) return;
 
-  const category = {
-    id: getUnId(),
-    name,
-  };
+    const category = {
+      id: getUnId(),
+      name,
+    };
 
-  model.state.push(category);
+    model.state.push(category);
 
-  controlRender();
+    controlRender();
+  } catch (err) {
+    throw err;
+  }
 };

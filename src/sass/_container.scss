@@ -59,21 +59,59 @@
       cursor: pointer;
     }
 
-    &-item.last-child {
+    &-item:last-child {
       background-image: url(../img/i.gif);
       background-repeat: no-repeat;
     }
 
-    &-item .Container {
+    &-item {
       display: block;
+
+      .list {
+        position: relative;
+      }
+    }
+
+    &-item.opened .list {
+      opacity: 1;
+      animation: appear 0.2s linear forwards;
     }
 
     &-item.closed .list {
-      display: none;
+      opacity: 0;
+      animation: disappear 0.2s linear forwards;
     }
   }
 
   & > ul.list > li.list-item {
     background-image: none;
+  }
+}
+
+@keyframes disappear {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+    height: 0;
+  }
+}
+
+@keyframes appear {
+  100% {
+    opacity: 1;
+    height: 100%;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  0% {
+    opacity: 0;
+    height: 0;
   }
 }

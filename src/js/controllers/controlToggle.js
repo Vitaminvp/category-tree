@@ -1,9 +1,8 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import * as model from '../model.js';
-import treeView from '../views/treeView.js';
+import { treeView } from '../views';
 import { findListItem } from '../helpers';
-import { controlRender } from './controlRender';
 
 export const controlToggle = function (id) {
   try {
@@ -13,7 +12,7 @@ export const controlToggle = function (id) {
 
     current.closed = !current.closed;
 
-    controlRender();
+    treeView.update(model.state);
   } catch (err) {
     treeView.renderError(err);
   }

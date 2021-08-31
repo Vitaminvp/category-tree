@@ -24,6 +24,11 @@ class ModalView extends View {
     this.render(data);
   }
 
+  showAlertHandler(data) {
+    this._toggleModal();
+    this.render(data);
+  }
+
   _hideModalHandler() {
     this._btnClose.addEventListener('click', this._toggleModal);
     this._overlay.addEventListener('click', this._toggleModal);
@@ -40,9 +45,21 @@ class ModalView extends View {
     });
   }
 
-  _generateMarkup({ title, defaultValue }) {
+  _generateMarkup({ title, defaultValue, alert }) {
+    const btn = `
+      <button class="btn modal__btn">
+        <svg>
+          <use href="${icons}#icon-check"/>
+        </svg>
+        <span>Confirm</span>
+      </button>
+    `;
+    const header = `<h3 class="modal__heading">${title}</h3>`;
+
+    if (alert) return header + btn;
+
     return `
-      <h3 class="modal__heading">${title}</h3>
+      ${header}
       <div class="modal__input">
         <label>Category name</label>
         <input
@@ -53,12 +70,7 @@ class ModalView extends View {
           placeholder="Please, write category name"
         />
       </div>
-      <button class="btn modal__btn">
-        <svg>
-          <use href="${icons}#icon-check"></use>
-        </svg>
-        <span>Confirm</span>
-      </button>
+      ${btn}
     `;
   }
 }
