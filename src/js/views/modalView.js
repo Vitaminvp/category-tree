@@ -12,7 +12,13 @@ class ModalView extends View {
     super();
     this._hideModalHandler();
     this.submitHandler();
+    this._handleTransition();
   }
+
+  _selectHandler = () => {
+    const input = this._parentElement.querySelector("form input[name='name']");
+    if (input) input.select();
+  };
 
   _toggleModal = () => {
     this._overlay.classList.toggle('hidden');
@@ -27,6 +33,10 @@ class ModalView extends View {
   showAlertHandler(data) {
     this._toggleModal();
     this.render(data);
+  }
+
+  _handleTransition() {
+    this._overlay.addEventListener('transitionend', this._selectHandler);
   }
 
   _hideModalHandler() {
@@ -65,9 +75,13 @@ class ModalView extends View {
         <input
           value="${defaultValue}"
           type="text"
+          title="Min length 3 and max length 50, no spaces in the beginning and in the end. No special chars allowed."
           required
           name="name"
+          pattern="^\\b[\\w \.]{3,55}\\b$"
           placeholder="Please, write category name"
+          maxlength="55"
+          minlength="3"
         />
       </div>
       ${btn}

@@ -11,14 +11,14 @@ export const controlAdd = function (id) {
     modalView.showModalHandler({
       title: ADD_ITEM,
       defaultValue: current.name,
-      handler: addItem(current),
+      handler: addItem(current, id),
     });
   } catch (err) {
     treeView.renderError(err);
   }
 };
 
-const addItem = currentItem => name => {
+const addItem = (currentItem, id) => name => {
   try {
     if (isNotDefined(name)) return;
 
@@ -31,7 +31,7 @@ const addItem = currentItem => name => {
     currentItem.children = childrenList ? [...childrenList, newItem] : [newItem];
     currentItem.closed = false;
 
-    treeView.render(model.state);
+    treeView.create(currentItem.children, id);
   } catch (err) {
     throw err;
   }

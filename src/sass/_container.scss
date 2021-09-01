@@ -72,7 +72,7 @@
       }
     }
 
-    &-item.opened .list {
+    &-item .list {
       opacity: 1;
       animation: appear 0.2s linear forwards;
     }

@@ -39,31 +39,51 @@ export default class View {
     });
   }
 
-  // TODO Virtual DOM update
-  // modify(data) {
-  //   this._data = data;
-  //   const newMarkup = this._generateMarkup(data);
-  //
-  //   const newDOM = document.createRange().createContextualFragment(newMarkup);
-  //   const newElements = Array.from(newDOM.querySelectorAll('*'));
-  //   const curElements = Array.from(this._parentElement.querySelectorAll('*'));
-  //
-  //   newElements.forEach((newEl, i) => {
-  //     const curEl = curElements[i];
-  //
-  //     if (isNotDefined(curEl)) {
-  //       curElements[i - 1]?.closest('.list-item').appendChild(newEl);
-  //     }
-  //   });
-  //
-  //   curElements.forEach((curEl, i) => {
-  //     const newEl = newElements[i];
-  //
-  //     if (isNotDefined(newEl)) {
-  //       curEl.parentElement.removeChild(curEl);
-  //     }
-  //   });
-  // }
+  _findListItem(id) {
+    return Array.from(this._parentElement.querySelectorAll('li')).find(
+      item => item.dataset.id === id,
+    );
+  }
+
+  remove(data, id) {
+    this._data = data;
+
+    const curEl = this._findListItem(id);
+
+    const parentList = curEl.parentNode;
+
+    parentList.removeChild(curEl);
+
+    const grandParent = parentList.parentNode;
+
+    const hasChild = Array.from(parentList.childNodes).some(
+      node => node.nodeType !== Node.TEXT_NODE,
+    );
+
+    if (!hasChild) {
+      grandParent.removeChild(parentList);
+      grandParent.classList.remove('has-children');
+    }
+    if (grandParent.id === 'root') this._data.handler();
+  }
+
+  create(data, id) {
+    const curEl = this._findListItem(id);
+
+    const markup = this._generateMarkup(data);
+    const list = curEl.querySelector('.list');
+
+    curEl.classList.add('has-children');
+    curEl.classList.remove('closed');
+
+    const newDOM = document.createRange().createContextualFragment(markup);
+
+    if (list) {
+      list.parentNode.replaceChild(newDOM, list);
+    } else {
+      curEl.appendChild(newDOM);
+    }
+  }
 
   renderError(message = this._errorMessage) {
     const markup = `

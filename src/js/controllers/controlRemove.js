@@ -12,7 +12,7 @@ export const controlRemove = function (id) {
 
     modalView.showModalHandler({
       title: YOU_SURE,
-      handler: deleteItem(list, idx),
+      handler: deleteItem(list, idx, id),
       alert: true,
     });
   } catch (err) {
@@ -20,11 +20,11 @@ export const controlRemove = function (id) {
   }
 };
 
-export const deleteItem = (list, id) => () => {
+export const deleteItem = (list, idx, id) => () => {
   try {
-    list.splice(id, DEL_AMOUNT);
+    list.splice(idx, DEL_AMOUNT);
 
-    controlRender();
+    treeView.remove({ handler: controlRender }, id);
   } catch (err) {
     throw err;
   }
