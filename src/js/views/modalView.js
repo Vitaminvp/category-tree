@@ -1,5 +1,6 @@
 import View from './view.js';
 import icons from 'url:../../img/icons.svg';
+import { KEYS } from '../config';
 
 class ModalView extends View {
   _parentElement = document.querySelector('.modal');
@@ -11,7 +12,7 @@ class ModalView extends View {
   constructor() {
     super();
     this._hideModalHandler();
-    this.submitHandler();
+    this._submitHandler();
     this._handleTransition();
   }
 
@@ -20,40 +21,63 @@ class ModalView extends View {
     if (input) input.select();
   };
 
-  _toggleModal = () => {
-    this._overlay.classList.toggle('hidden');
-    this._window.classList.toggle('hidden');
+  _openModal = () => {
+    this._overlay.classList.remove('hidden');
+    this._window.classList.remove('hidden');
   };
 
-  showModalHandler(data) {
-    this._toggleModal();
-    this.render(data);
-  }
+  _closeModal = () => {
+    this._overlay.classList.add('hidden');
+    this._window.classList.add('hidden');
+    this._removeKeyPressHandler();
+  };
 
-  showAlertHandler(data) {
-    this._toggleModal();
+  _handleKeyPress = e => {
+    const { code } = e;
+
+    if (code === KEYS.escape) {
+      return this._closeModal();
+    }
+
+    if (code === KEYS.enter && this._data.alert) {
+      e.preventDefault();
+      return this._handleSubmit();
+    }
+  };
+
+  _addKeyPressHandler = () => document.addEventListener('keydown', this._handleKeyPress);
+
+  _removeKeyPressHandler = () => document.removeEventListener('keydown', this._handleKeyPress);
+
+  showModalHandler(data) {
+    this._openModal();
     this.render(data);
+    this._addKeyPressHandler();
   }
 
   _handleTransition() {
     this._overlay.addEventListener('transitionend', this._selectHandler);
   }
 
-  _hideModalHandler() {
-    this._btnClose.addEventListener('click', this._toggleModal);
-    this._overlay.addEventListener('click', this._toggleModal);
-  }
+  _hideModalHandler = () => {
+    this._btnClose.addEventListener('click', this._closeModal);
+    this._overlay.addEventListener('click', this._closeModal);
+  };
 
-  submitHandler() {
+  _handleSubmit = () => {
+    const [{ value }] = this._parentElement.elements;
+
+    this._data.handler(value);
+    this._closeModal();
+  };
+
+  _submitHandler = () => {
     this._parentElement.addEventListener('submit', e => {
       e.preventDefault();
 
-      const [{ value }] = this._parentElement.elements;
-
-      this._toggleModal();
-      this._data.handler(value);
+      this._handleSubmit();
     });
-  }
+  };
 
   _generateMarkup({ title, defaultValue, alert }) {
     const btn = `
@@ -75,7 +99,7 @@ class ModalView extends View {
         <input
           value="${defaultValue}"
           type="text"
-          title="Min length 3 and max length 50, no spaces in the beginning and in the end. No special chars allowed."
+          title="Min length 3 and max length 55, no spaces in the beginning and in the end. No special chars allowed."
           required
           name="name"
           pattern="^\\b[\\w \.]{3,55}\\b$"

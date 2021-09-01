@@ -6,3 +6,7 @@ export const YOU_SURE = 'Are you sure?';
 export const STORAGE_KEY = 'categoryTree';
 export const ERR_MESSAGE = 'Please try again!';
 export const DEFAULT_NAME = 'Root';
+export const KEYS = {
+  enter: 'Enter',
+  escape: 'Escape',
+};

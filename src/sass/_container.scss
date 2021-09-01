@@ -1,4 +1,6 @@
 #root {
+  overflow-y: scroll;
+
   .list {
     transition: all 0.3s ease-in-out;
 
@@ -62,6 +64,10 @@
     &-item:last-child {
       background-image: url(../img/i.gif);
       background-repeat: no-repeat;
+    }
+
+    &-item .list-item-child {
+      white-space: nowrap;
     }
 
     &-item {
