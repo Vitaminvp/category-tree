@@ -6,7 +6,7 @@
 
     &-item {
       background-image: url(../img/i.gif);
-      background-position: top left;
+      background-position: top 1px left;
       background-repeat: repeat-y;
       display: block;
       padding-left: 20px;
@@ -91,6 +91,35 @@
 
   & > ul.list > li.list-item {
     background-image: none;
+  }
+
+  @media only screen and (max-width: $bp-medium) {
+    font-size: 50%;
+
+    .list-item:before {
+      top: 2px;
+    }
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    font-size: 30%;
+
+    .list-item {
+      background-position: top -3px left;
+      margin-left: 25px;
+
+      .list-item-child {
+        vertical-align: text-top;
+      }
+
+      &:before {
+        top: 4px;
+      }
+
+      &.has-children:before {
+        top: 3px;
+      }
+    }
   }
 }
 

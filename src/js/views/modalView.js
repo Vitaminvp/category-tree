@@ -102,7 +102,7 @@ class ModalView extends View {
           title="Min length 3 and max length 55, no spaces in the beginning and in the end. No special chars allowed."
           required
           name="name"
-          pattern="^\\b[\\w \.]{3,55}\\b$"
+          pattern="^\\b[\\w \.-]{3,55}\\b$"
           placeholder="Please, write category name"
           maxlength="55"
           minlength="3"
