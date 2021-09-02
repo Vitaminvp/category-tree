@@ -1,19 +1,19 @@
-import icons from 'url:../../img/icons.svg';
-import View from './view';
+import icons from "../../img/icons.svg";
+import View from "./view";
 
 const listClass = {
-  child: 'list-item-child',
-  delete: 'list-item-delete',
-  add: 'list-item-add',
-  edit: 'list-item-edit',
-  toggle: 'list-item-toggle',
-  item: 'list-item',
+  child: "list-item-child",
+  delete: "list-item-delete",
+  add: "list-item-add",
+  edit: "list-item-edit",
+  toggle: "list-item-toggle",
+  item: "list-item",
 };
 
 class TreeView extends View {
-  _parentElement = document.getElementById('root');
+  private _parentElement = document.getElementById("root") as HTMLLIElement;
 
-  _generateListContent(name) {
+  _generateListContent(name: string) {
     return `
       <span class="${listClass.child} ${listClass.toggle}">${name}</span>
       <span title="Delete item" class="${listClass.child} ${listClass.delete}">
@@ -41,7 +41,9 @@ class TreeView extends View {
           .map(({ children, id, name, closed }) => {
             if (children && children.length) {
               return `
-                <li class="list-item has-children ${closed ? 'closed' : ''}" data-id="${id}">
+                <li class="list-item has-children ${
+                  closed ? "closed" : ""
+                }" data-id="${id}">
                   ${this._generateListContent(name)}
                   ${this._generateMarkup(children)}
                 </li>`;
@@ -52,18 +54,18 @@ class TreeView extends View {
                 ${this._generateListContent(name)}
               </li>`;
           })
-          .join('')}
+          .join("")}
 
       </ul>
     `;
   }
 
-  addRenderHandler(handler) {
-    window.addEventListener('load', handler);
+  addRenderHandler(handler: Function) {
+    window.addEventListener("load", handler);
   }
 
   addClickHandler(addHandler, removeHandler, editHandler, toggleHandler) {
-    this._parentElement.addEventListener('click', function (e) {
+    this._parentElement.addEventListener("click", function (e) {
       const listItem = e.target.closest(`.${listClass.item}`);
       const icon = e.target.closest(`.${listClass.child}`);
 

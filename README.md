@@ -17,7 +17,7 @@
 
 ```js
 #!/bin/sh
-if workbox generateSW workbox-config.js ; then
+if workbox generateSW workbox-config.ts ; then
   git add sw.js
   exit 0
 else
@@ -36,7 +36,7 @@ node_js:
   - 11.13.0
 script:
   - npm install --global workbox-cli
-  - workbox generateSW workbox-config.js
+  - workbox generateSW workbox-config.ts
 deploy:
   - provider: s3
     skip_cleanup: true

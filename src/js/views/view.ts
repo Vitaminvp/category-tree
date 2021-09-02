@@ -1,55 +1,69 @@
-import icons from 'url:../../img/icons.svg';
-import { ERR_MESSAGE } from '../config';
+import icons from "../../img/icons.svg";
+import { ERR_MESSAGE } from "../config";
 
 export default class View {
-  _data;
-  _errorMessage = ERR_MESSAGE;
+  // @ts-ignore
+  private _data;
+  private _errorMessage = ERR_MESSAGE;
 
   _clear() {
-    this._parentElement.innerHTML = '';
+    // @ts-ignore
+    this._parentElement.innerHTML = "";
   }
-
+  // @ts-ignore
   render(data) {
     if (!data) return this.renderError();
 
     this._data = data;
+    // @ts-ignore
     const markup = this._generateMarkup(data);
 
     this._clear();
-    this._parentElement.insertAdjacentHTML('afterbegin', markup);
+    // @ts-ignore
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
-
+  // @ts-ignore
   update(data) {
     this._data = data;
+    // @ts-ignore
     const newMarkup = this._generateMarkup(data);
 
     const newDOM = document.createRange().createContextualFragment(newMarkup);
-    const newElements = Array.from(newDOM.querySelectorAll('*'));
-    const curElements = Array.from(this._parentElement.querySelectorAll('*'));
+    const newElements = Array.from(newDOM.querySelectorAll("*"));
+    // @ts-ignore
+    const curElements = Array.from(
+      // @ts-ignore
+      this._parentElement.querySelectorAll("*"),
+    ) as HTMLLIElement[];
 
     newElements.forEach((newEl, i) => {
       const curEl = curElements[i];
-      if (!newEl.isEqualNode(curEl) && newEl.firstChild?.nodeValue.trim() !== '') {
+      // @ts-ignore
+      if (!newEl.isEqualNode(curEl) && newEl.firstChild?.nodeValue.trim() !== "") {
         curEl.textContent = newEl.textContent;
       }
 
       if (!newEl.isEqualNode(curEl)) {
-        Array.from(newEl.attributes).forEach(attr => curEl.setAttribute(attr.name, attr.value));
+        Array.from(newEl.attributes).forEach(attr =>
+          curEl.setAttribute(attr.name, attr.value),
+        );
       }
     });
   }
 
-  _findListItem(id) {
-    return Array.from(this._parentElement.querySelectorAll('li')).find(
+  _findListItem(id: string) {
+    // @ts-ignore
+    return Array.from(this._parentElement.querySelectorAll("li")).find(
+      // @ts-ignore
       item => item.dataset.id === id,
     );
   }
-
-  remove(data, id) {
+  // @ts-ignore
+  remove(data, id: string) {
     this._data = data;
 
     const curEl = this._findListItem(id);
-
+    // @ts-ignore
     const parentList = curEl.parentNode;
 
     parentList.removeChild(curEl);
@@ -57,35 +71,39 @@ export default class View {
     const grandParent = parentList.parentNode;
 
     const hasChild = Array.from(parentList.childNodes).some(
+      // @ts-ignore
       node => node.nodeType !== Node.TEXT_NODE,
     );
 
     if (!hasChild) {
       grandParent.removeChild(parentList);
-      grandParent.classList.remove('has-children');
+      grandParent.classList.remove("has-children");
     }
-    if (grandParent.id === 'root') this._data.handler();
+    if (grandParent.id === "root") this._data.handler();
   }
-
+  // @ts-ignore
   create(data, id) {
     const curEl = this._findListItem(id);
-
+    // @ts-ignore
     const markup = this._generateMarkup(data);
-    const list = curEl.querySelector('.list');
-
-    curEl.classList.add('has-children');
-    curEl.classList.remove('closed');
+    // @ts-ignore
+    const list = curEl.querySelector(".list");
+    // @ts-ignore
+    curEl.classList.add("has-children");
+    // @ts-ignore
+    curEl.classList.remove("closed");
 
     const newDOM = document.createRange().createContextualFragment(markup);
 
     if (list) {
       list.parentNode.replaceChild(newDOM, list);
     } else {
+      // @ts-ignore
       curEl.appendChild(newDOM);
     }
   }
 
-  renderError(message = this._errorMessage) {
+  renderError(message: string = this._errorMessage) {
     const markup = `
       <div class="error">
         <div>
@@ -98,6 +116,7 @@ export default class View {
     `;
 
     this._clear();
-    this._parentElement.insertAdjacentHTML('afterbegin', markup);
+    // @ts-ignore
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 }

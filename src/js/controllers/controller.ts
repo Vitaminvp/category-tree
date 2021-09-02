@@ -1,5 +1,5 @@
-import * as model from '../model';
-import { treeView, emptyListView } from '../views';
+import * as model from "../model";
+import { treeView, emptyListView } from "../views";
 import {
   controlRender,
   controlAdd,
@@ -7,9 +7,11 @@ import {
   controlToggle,
   controlEdit,
   controlAddFirst,
-} from './index';
+} from "./index";
 
+// @ts-ignore
 if (module.hot) {
+  // @ts-ignore
   module.hot.accept();
 }
 

@@ -1,13 +1,13 @@
-import View from './view.js';
-import icons from 'url:../../img/icons.svg';
-import { KEYS } from '../config';
+import View from "./view";
+import icons from "../../img/icons.svg";
+import { KEYS } from "../config";
 
 class ModalView extends View {
-  _parentElement = document.querySelector('.modal');
+  _parentElement = document.querySelector(".modal");
 
-  _window = document.querySelector('.modal-window');
-  _overlay = document.querySelector('.overlay');
-  _btnClose = document.querySelector('.btn--close-modal');
+  _window = document.querySelector(".modal-window");
+  _overlay = document.querySelector(".overlay");
+  _btnClose = document.querySelector(".btn--close-modal");
 
   constructor() {
     super();
@@ -22,13 +22,13 @@ class ModalView extends View {
   };
 
   _openModal = () => {
-    this._overlay.classList.remove('hidden');
-    this._window.classList.remove('hidden');
+    this._overlay.classList.remove("hidden");
+    this._window.classList.remove("hidden");
   };
 
   _closeModal = () => {
-    this._overlay.classList.add('hidden');
-    this._window.classList.add('hidden');
+    this._overlay.classList.add("hidden");
+    this._window.classList.add("hidden");
     this._removeKeyPressHandler();
   };
 
@@ -45,9 +45,10 @@ class ModalView extends View {
     }
   };
 
-  _addKeyPressHandler = () => document.addEventListener('keydown', this._handleKeyPress);
+  _addKeyPressHandler = () => document.addEventListener("keydown", this._handleKeyPress);
 
-  _removeKeyPressHandler = () => document.removeEventListener('keydown', this._handleKeyPress);
+  _removeKeyPressHandler = () =>
+    document.removeEventListener("keydown", this._handleKeyPress);
 
   showModalHandler(data) {
     this._openModal();
@@ -56,12 +57,12 @@ class ModalView extends View {
   }
 
   _handleTransition() {
-    this._overlay.addEventListener('transitionend', this._selectHandler);
+    this._overlay.addEventListener("transitionend", this._selectHandler);
   }
 
   _hideModalHandler = () => {
-    this._btnClose.addEventListener('click', this._closeModal);
-    this._overlay.addEventListener('click', this._closeModal);
+    this._btnClose.addEventListener("click", this._closeModal);
+    this._overlay.addEventListener("click", this._closeModal);
   };
 
   _handleSubmit = () => {
@@ -72,7 +73,7 @@ class ModalView extends View {
   };
 
   _submitHandler = () => {
-    this._parentElement.addEventListener('submit', e => {
+    this._parentElement.addEventListener("submit", e => {
       e.preventDefault();
 
       this._handleSubmit();
@@ -102,7 +103,7 @@ class ModalView extends View {
           title="Min length 3 and max length 55, no spaces in the beginning and in the end. No special chars allowed."
           required
           name="name"
-          pattern="^\\b[\\w \.-]{3,55}\\b$"
+          pattern="^\\b[\\w .-]{3,55}\\b$"
           placeholder="Please, write category name"
           maxlength="55"
           minlength="3"

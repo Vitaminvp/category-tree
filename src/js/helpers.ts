@@ -1,7 +1,9 @@
-export const findListItem = (store, itemId) => {
-  let result = {};
+import { Category, FoundList } from "./types";
 
-  const findObj = (list, result) => {
+export const findListItem = (store: Category[], itemId: string) => {
+  const result = {} as FoundList;
+
+  const findObj = (list: Category[], result: FoundList): FoundList | void => {
     for (let i = 0; i < list.length; i++) {
       const current = list[i];
       const { id, children } = current;
@@ -20,13 +22,13 @@ export const findListItem = (store, itemId) => {
   return result;
 };
 
-export const isNotDefined = value => value == null;
+export const isNotDefined = <T>(value: T): value is T => value == null;
 
-export const isZeroLength = str => str.length === 0;
+export const isZeroLength = <T extends { length: number }>(str: T) => str.length === 0;
 
 export const getUnId = () => Math.random().toString(16).slice(2);
 
-export const saveToStorage = (key, value) => {
+export const saveToStorage = <T>(key: string, value: T) => {
   try {
     localStorage.setItem(key, JSON.stringify(value));
   } catch (err) {
@@ -34,9 +36,9 @@ export const saveToStorage = (key, value) => {
   }
 };
 
-export const getFromStorage = key => {
+export const getFromStorage = (key: string) => {
   try {
-    const result = localStorage.getItem(key);
+    const result = localStorage.getItem(key) as string;
 
     return JSON.parse(result);
   } catch (err) {

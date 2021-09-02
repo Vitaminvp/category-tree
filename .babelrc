@@ -1,8 +1,4 @@
 {
-  "env": {
-    "test": {
-      "plugins": ["@babel/plugin-transform-modules-commonjs"]
-    }
-  },
-  "presets": ["@babel/preset-env"]
+  "presets": ["@babel/preset-env", "@babel/preset-flow"],
+  "plugins": ["@babel/plugin-syntax-flow"]
 }
