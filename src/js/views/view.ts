@@ -1,45 +1,44 @@
 import icons from "../../img/icons.svg";
 import { ERR_MESSAGE } from "../config";
+import { ArrowFn, Category } from "../types";
 
-export default class View {
-  // @ts-ignore
-  private _data;
-  private _errorMessage = ERR_MESSAGE;
+export default abstract class View {
+  protected _data: Category[] | undefined;
+  abstract _parentElement: HTMLHtmlElement | unknown;
+  abstract _generateMarkup(data?: Category[]): string;
 
-  _clear() {
-    // @ts-ignore
-    this._parentElement.innerHTML = "";
+  protected _errorMessage = ERR_MESSAGE;
+
+  _clear(): void {
+    (this._parentElement as HTMLHtmlElement).innerHTML = "";
   }
-  // @ts-ignore
-  render(data) {
+
+  render(data: Category[]): void {
     if (!data) return this.renderError();
 
     this._data = data;
-    // @ts-ignore
     const markup = this._generateMarkup(data);
 
     this._clear();
-    // @ts-ignore
-    this._parentElement.insertAdjacentHTML("afterbegin", markup);
+    (this._parentElement as HTMLHtmlElement).insertAdjacentHTML("afterbegin", markup);
   }
-  // @ts-ignore
-  update(data) {
+
+  update(data: Category[]): void {
     this._data = data;
-    // @ts-ignore
+
     const newMarkup = this._generateMarkup(data);
 
     const newDOM = document.createRange().createContextualFragment(newMarkup);
     const newElements = Array.from(newDOM.querySelectorAll("*"));
-    // @ts-ignore
+
     const curElements = Array.from(
-      // @ts-ignore
-      this._parentElement.querySelectorAll("*"),
+      (this._parentElement as HTMLHtmlElement).querySelectorAll("*"),
     ) as HTMLLIElement[];
 
     newElements.forEach((newEl, i) => {
       const curEl = curElements[i];
-      // @ts-ignore
-      if (!newEl.isEqualNode(curEl) && newEl.firstChild?.nodeValue.trim() !== "") {
+
+      if (!newEl.isEqualNode(curEl) && newEl?.firstChild?.nodeValue?.trim() !== "") {
         curEl.textContent = newEl.textContent;
       }
 
@@ -51,27 +50,21 @@ export default class View {
     });
   }
 
-  _findListItem(id: string) {
-    // @ts-ignore
-    return Array.from(this._parentElement.querySelectorAll("li")).find(
-      // @ts-ignore
-      item => item.dataset.id === id,
-    );
+  _findListItem(id: string): HTMLLIElement | undefined {
+    return Array.from(
+      (this._parentElement as HTMLHtmlElement).querySelectorAll("li"),
+    ).find(item => item.dataset.id === id);
   }
-  // @ts-ignore
-  remove(data, id: string) {
-    this._data = data;
 
+  remove(id: string, handler: ArrowFn): void {
     const curEl = this._findListItem(id);
-    // @ts-ignore
-    const parentList = curEl.parentNode;
+    const parentList = curEl?.parentNode as HTMLHtmlElement;
 
-    parentList.removeChild(curEl);
+    parentList.removeChild(curEl as Node);
 
-    const grandParent = parentList.parentNode;
+    const grandParent = parentList.parentNode as HTMLHtmlElement;
 
     const hasChild = Array.from(parentList.childNodes).some(
-      // @ts-ignore
       node => node.nodeType !== Node.TEXT_NODE,
     );
 
@@ -79,31 +72,30 @@ export default class View {
       grandParent.removeChild(parentList);
       grandParent.classList.remove("has-children");
     }
-    if (grandParent.id === "root") this._data.handler();
+    if (grandParent?.id === "root") handler();
   }
-  // @ts-ignore
-  create(data, id) {
-    const curEl = this._findListItem(id);
-    // @ts-ignore
+
+  create(data: Category[], id: string): void {
+    const curEl = this._findListItem(id) as HTMLLIElement;
+
     const markup = this._generateMarkup(data);
-    // @ts-ignore
+
     const list = curEl.querySelector(".list");
-    // @ts-ignore
+
     curEl.classList.add("has-children");
-    // @ts-ignore
+
     curEl.classList.remove("closed");
 
     const newDOM = document.createRange().createContextualFragment(markup);
 
     if (list) {
-      list.parentNode.replaceChild(newDOM, list);
+      (list.parentNode as Node).replaceChild(newDOM, list);
     } else {
-      // @ts-ignore
-      curEl.appendChild(newDOM);
+      (curEl as Node).appendChild(newDOM);
     }
   }
 
-  renderError(message: string = this._errorMessage) {
+  renderError(message: string = this._errorMessage): void {
     const markup = `
       <div class="error">
         <div>
@@ -116,7 +108,6 @@ export default class View {
     `;
 
     this._clear();
-    // @ts-ignore
-    this._parentElement.insertAdjacentHTML("afterbegin", markup);
+    (this._parentElement as HTMLHtmlElement).insertAdjacentHTML("afterbegin", markup);
   }
 }

@@ -119,6 +119,10 @@
       &.has-children:before {
         top: 3px;
       }
+
+      &.has-children.closed:before {
+        top: 3px;
+      }
     }
   }
 }

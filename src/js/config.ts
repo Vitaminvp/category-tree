@@ -10,3 +10,13 @@ export const KEYS = {
   enter: "Enter",
   escape: "Escape",
 };
+export const DEL_AMOUNT = 1;
+
+export enum listClass {
+  child = "list-item-child",
+  delete = "list-item-delete",
+  add = "list-item-add",
+  edit = "list-item-edit",
+  toggle = "list-item-toggle",
+  item = "list-item",
+}

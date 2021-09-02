@@ -15,7 +15,7 @@ if (module.hot) {
   module.hot.accept();
 }
 
-export const init = function () {
+export const init = (): void => {
   model.manageStorage();
   treeView.addRenderHandler(controlRender);
   emptyListView.addClickHandler(controlAddFirst);

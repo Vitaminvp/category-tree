@@ -1,13 +1,16 @@
 import View from "./view";
 import icons from "../../img/icons.svg";
 import { KEYS } from "../config";
+import { ModalMarkUp } from "../types";
 
 class ModalView extends View {
-  _parentElement = document.querySelector(".modal");
+  _parentElement = document.querySelector(".modal") as HTMLFormElement;
 
-  _window = document.querySelector(".modal-window");
-  _overlay = document.querySelector(".overlay");
-  _btnClose = document.querySelector(".btn--close-modal");
+  _window = document.querySelector(".modal-window") as HTMLHtmlElement;
+  _overlay = document.querySelector(".overlay") as HTMLHtmlElement;
+  _btnClose = document.querySelector(".btn--close-modal") as HTMLHtmlElement;
+
+  private _options = {} as ModalMarkUp;
 
   constructor() {
     super();
@@ -16,71 +19,77 @@ class ModalView extends View {
     this._handleTransition();
   }
 
-  _selectHandler = () => {
-    const input = this._parentElement.querySelector("form input[name='name']");
+  private _selectHandler = (): void => {
+    const input = this._parentElement.querySelector(
+      "form input[name='name']",
+    ) as HTMLInputElement;
     if (input) input.select();
   };
 
-  _openModal = () => {
-    this._overlay.classList.remove("hidden");
-    this._window.classList.remove("hidden");
+  private _openModal = (): void => {
+    this._overlay?.classList.remove("hidden");
+    this._window?.classList.remove("hidden");
   };
 
-  _closeModal = () => {
-    this._overlay.classList.add("hidden");
-    this._window.classList.add("hidden");
+  private _closeModal = (): void => {
+    this._overlay?.classList.add("hidden");
+    this._window?.classList.add("hidden");
     this._removeKeyPressHandler();
   };
 
-  _handleKeyPress = e => {
+  private _handleKeyPress = (e: KeyboardEvent): void => {
     const { code } = e;
 
     if (code === KEYS.escape) {
       return this._closeModal();
     }
 
-    if (code === KEYS.enter && this._data.alert) {
+    if (code === KEYS.enter && this._options?.alert) {
       e.preventDefault();
       return this._handleSubmit();
     }
   };
 
-  _addKeyPressHandler = () => document.addEventListener("keydown", this._handleKeyPress);
+  private _addKeyPressHandler = (): void =>
+    document.addEventListener("keydown", this._handleKeyPress);
 
-  _removeKeyPressHandler = () =>
+  private _removeKeyPressHandler = (): void =>
     document.removeEventListener("keydown", this._handleKeyPress);
 
-  showModalHandler(data) {
+  showModalHandler(options: ModalMarkUp): void {
+    this._options = options;
     this._openModal();
-    this.render(data);
+    this.render([]);
     this._addKeyPressHandler();
   }
 
-  _handleTransition() {
+  private _handleTransition(): void {
     this._overlay.addEventListener("transitionend", this._selectHandler);
   }
 
-  _hideModalHandler = () => {
+  private _hideModalHandler = (): void => {
     this._btnClose.addEventListener("click", this._closeModal);
     this._overlay.addEventListener("click", this._closeModal);
   };
 
-  _handleSubmit = () => {
-    const [{ value }] = this._parentElement.elements;
+  private _handleSubmit = (): void => {
+    const [InputElement] = Array.from(this._parentElement.elements);
+    const { value } = InputElement as HTMLInputElement;
 
-    this._data.handler(value);
+    this._options.handler?.(value);
     this._closeModal();
   };
 
-  _submitHandler = () => {
-    this._parentElement.addEventListener("submit", e => {
+  private _submitHandler = (): void => {
+    this._parentElement?.addEventListener("submit", e => {
       e.preventDefault();
 
       this._handleSubmit();
     });
   };
 
-  _generateMarkup({ title, defaultValue, alert }) {
+  _generateMarkup(): string {
+    const { title, defaultValue, alert } = this._options;
     const btn = `
       <button class="btn modal__btn">
         <svg>

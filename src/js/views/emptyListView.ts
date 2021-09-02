@@ -1,16 +1,15 @@
 import View from "./view";
 import icons from "../../img/icons.svg";
+import { ArrowFn } from "../types";
 
 class EmptyListView extends View {
-  _parentElement = document.getElementById("create");
-  // @ts-ignore
+  _parentElement = document.getElementById("create") as HTMLHtmlElement;
+
   clear = this._clear;
-  // @ts-ignore
-  addClickHandler(addHandler) {
-    // @ts-ignore
-    this._parentElement.addEventListener("click", function ({ target }) {
-      // @ts-ignore
-      const addBtn = target.closest(".add-list-btn");
+
+  addClickHandler(addHandler: ArrowFn): void {
+    this._parentElement.addEventListener("click", ({ target }: MouseEvent) => {
+      const addBtn = (target as HTMLInputElement).closest(".add-list-btn");
 
       if (!addBtn) return;
 
@@ -18,7 +17,7 @@ class EmptyListView extends View {
     });
   }
 
-  _generateMarkup() {
+  _generateMarkup(): string {
     return `
       <div class="add-list">
         <svg class="add-list-btn">

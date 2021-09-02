@@ -57,7 +57,7 @@ describe("Helper functions:", () => {
   });
 
   test("isZeroLength called with undefined", () => {
-    function expected() {
+    function expected(): void {
       isZeroLength(undefined as unknown as string);
     }
 

@@ -5,7 +5,7 @@ import { treeView } from "../views";
 import { findListItem, isNotDefined } from "../helpers";
 import { Category, FoundList } from "../types";
 
-export const controlToggle = function (id: string) {
+export const controlToggle = (id: string): void => {
   try {
     const { list, idx }: FoundList = findListItem(model.state, id);
 

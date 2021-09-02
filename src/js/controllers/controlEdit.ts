@@ -4,7 +4,17 @@ import { EDIT_ITEM } from "../config";
 import { treeView, modalView } from "../views";
 import { Category, FoundList } from "../types";
 
-export const controlEdit = function (id: string) {
+const editItem =
+  (currentItem: Category) =>
+  (name: string): void => {
+    if (isNotDefined(name)) return;
+
+    currentItem.name = name;
+
+    treeView.update(model.state);
+  };
+
+export const controlEdit = (id: string): void => {
   try {
     const { list, idx }: FoundList = findListItem(model.state, id);
 
@@ -20,12 +30,4 @@ export const controlEdit = function (id: string) {
   } catch (err) {
     treeView.renderError(err as string);
   }
-};
-
-const editItem = (currentItem: Category) => (name: string) => {
-  if (isNotDefined(name)) return;
-
-  currentItem.name = name;
-
-  treeView.update(model.state);
 };

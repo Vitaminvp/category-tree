@@ -5,19 +5,7 @@ import { treeView, modalView } from "../views";
 import { controlRender } from "./controlRender";
 import { Category } from "../types";
 
-export const controlAddFirst = function () {
-  try {
-    modalView.showModalHandler({
-      title: CREATE,
-      defaultValue: DEFAULT_NAME,
-      handler: addNewItem,
-    });
-  } catch (err) {
-    treeView.renderError(err as string);
-  }
-};
-
-const addNewItem = (name: string) => {
+const addNewItem = (name: string): void => {
   if (isNotDefined(name)) return;
 
   const category = {
@@ -28,4 +16,16 @@ const addNewItem = (name: string) => {
   model.state.push(category);
 
   controlRender();
+};
+
+export const controlAddFirst = (): void => {
+  try {
+    modalView.showModalHandler({
+      title: CREATE,
+      defaultValue: DEFAULT_NAME,
+      handler: addNewItem,
+    });
+  } catch (err) {
+    treeView.renderError(err as string);
+  }
 };

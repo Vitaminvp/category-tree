@@ -2,10 +2,9 @@ import { treeView, emptyListView } from "../views";
 import * as model from "../model";
 import { isZeroLength } from "../helpers";
 
-export const controlRender = function () {
+export const controlRender = (): void => {
   try {
     if (isZeroLength(model.state)) {
-      // @ts-ignore
       emptyListView.render(model.state);
     } else {
       emptyListView.clear();

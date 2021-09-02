@@ -2,18 +2,16 @@ import { findListItem, isNotDefined } from "../helpers";
 import * as model from "../model";
 import { modalView, treeView } from "../views";
 import { controlRender } from "./controlRender";
-import { YOU_SURE } from "../config";
+import { DEL_AMOUNT, YOU_SURE } from "../config";
 import { Category, FoundList } from "../types";
 
-const DEL_AMOUNT = 1;
-
-export const deleteItem = (list: Category[], idx: number, id: string) => () => {
+export const deleteItem = (list: Category[], idx: number, id: string) => (): void => {
   list.splice(idx, DEL_AMOUNT);
 
-  treeView.remove({ handler: controlRender }, id);
+  treeView.remove(id, controlRender);
 };
 
-export const controlRemove = function (id: string) {
+export const controlRemove = (id: string): void => {
   try {
     const { list, idx }: FoundList = findListItem(model.state, id);
 

@@ -49,9 +49,10 @@ export let state = [
   },
 ] as Category[];
 
-export const manageStorage = () => {
+export const manageStorage = (): void => {
   const storage = getFromStorage(STORAGE_KEY);
 
+  // @ts-ignore
   if (storage) state = storage;
 
   window.addEventListener("beforeunload", () => saveToStorage(STORAGE_KEY, state));
