@@ -6,7 +6,7 @@
   "scripts": {
     "lint:ts": "npx eslint --cache \"src/**/*.ts\"",
     "lint:ts:fix": "npm run lint:ts -- --fix",
-    "lint": "npm run lint:js:fix && npm run prettify",
+    "lint": "npm run lint:ts:fix && npm run prettify",
     "lint:staged": "npx lint-staged",
     "prebuild": "shx rm -rf dist/*",
     "prettify": "npx prettier --write \"**/*.{ts,scss,md,html}\"",
@@ -24,6 +24,7 @@
   "devDependencies": {
     "@babel/core": "^7.7.5",
     "@babel/preset-env": "^7.7.6",
+    "@babel/preset-typescript": "^7.15.0",
     "@types/jest": "^25.1.4",
     "@types/svg-injector": "0.0.27",
     "@typescript-eslint/eslint-plugin": "^2.25.0",

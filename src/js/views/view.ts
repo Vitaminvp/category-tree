@@ -1,15 +1,16 @@
 import icons from "../../img/icons.svg";
 import { ERR_MESSAGE } from "../config";
 import { ArrowFn, Category } from "../types";
+import { isNotDefined } from "../helpers";
 
 export default abstract class View {
   protected _data: Category[] | undefined;
-  abstract _parentElement: HTMLHtmlElement | unknown;
-  abstract _generateMarkup(data?: Category[]): string;
-
   protected _errorMessage = ERR_MESSAGE;
 
-  _clear(): void {
+  protected abstract _parentElement: HTMLHtmlElement | unknown;
+  protected abstract _generateMarkup(data?: Category[]): string;
+
+  protected _clear(): void {
     (this._parentElement as HTMLHtmlElement).innerHTML = "";
   }
 
@@ -21,6 +22,12 @@ export default abstract class View {
 
     this._clear();
     (this._parentElement as HTMLHtmlElement).insertAdjacentHTML("afterbegin", markup);
+  }
+
+  private _findListItem(id: string): HTMLLIElement | undefined {
+    return Array.from(
+      (this._parentElement as HTMLHtmlElement).querySelectorAll("li"),
+    ).find(item => item.dataset.id === id);
   }
 
   update(data: Category[]): void {
@@ -50,17 +57,14 @@ export default abstract class View {
     });
   }
 
-  _findListItem(id: string): HTMLLIElement | undefined {
-    return Array.from(
-      (this._parentElement as HTMLHtmlElement).querySelectorAll("li"),
-    ).find(item => item.dataset.id === id);
-  }
-
   remove(id: string, handler: ArrowFn): void {
     const curEl = this._findListItem(id);
-    const parentList = curEl?.parentNode as HTMLHtmlElement;
 
-    parentList.removeChild(curEl as Node);
+    if (isNotDefined(curEl)) return;
+
+    const parentList = (curEl as Node).parentNode as HTMLHtmlElement;
+
+    parentList.removeChild(curEl);
 
     const grandParent = parentList.parentNode as HTMLHtmlElement;
 
@@ -91,7 +95,7 @@ export default abstract class View {
     if (list) {
       (list.parentNode as Node).replaceChild(newDOM, list);
     } else {
-      (curEl as Node).appendChild(newDOM);
+      curEl.appendChild(newDOM);
     }
   }
 

@@ -7,7 +7,7 @@ import { isZeroLength } from "../helpers";
 class TreeView extends View {
   _parentElement = document.getElementById("root") as HTMLHtmlElement;
 
-  _generateListContent(name: string): string {
+  private _generateListContent(name: string): string {
     return `
       <span class="${listClass.child} ${listClass.toggle}">${name}</span>
       <span title="Delete item" class="${listClass.child} ${listClass.delete}">
