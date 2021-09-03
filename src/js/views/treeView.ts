@@ -1,7 +1,7 @@
 import icons from "../../img/icons.svg";
 import View from "./view";
 import { ArrowFn, Category } from "../types";
-import { listClass } from "../config";
+import { ListClass } from "../config";
 import { isZeroLength } from "../helpers";
 
 class TreeView extends View {
@@ -9,18 +9,18 @@ class TreeView extends View {
 
   private _generateListContent(name: string): string {
     return `
-      <span class="${listClass.child} ${listClass.toggle}">${name}</span>
-      <span title="Delete item" class="${listClass.child} ${listClass.delete}">
+      <span class="${ListClass.child} ${ListClass.toggle}">${name}</span>
+      <span title="Delete item" class="${ListClass.child} ${ListClass.delete}">
         <svg>
           <use href="${icons}#icon-minus-circle"/>
         </svg>
       </span>
-      <span title="Add item" class="${listClass.child} ${listClass.add}">
+      <span title="Add item" class="${ListClass.child} ${ListClass.add}">
         <svg>
           <use href="${icons}#icon-plus-circle"/>
         </svg>
       </span>
-      <span title="Edit item" class="${listClass.child} ${listClass.edit}">
+      <span title="Edit item" class="${ListClass.child} ${ListClass.edit}">
         <svg>
           <use href="${icons}#icon-edit"/>
         </svg>
@@ -66,18 +66,18 @@ class TreeView extends View {
   ): void {
     this._parentElement.addEventListener("click", ({ target }: MouseEvent) => {
       const listItem = (target as HTMLHtmlElement).closest(
-        `.${listClass.item}`,
+        `.${ListClass.item}`,
       ) as HTMLHtmlElement;
-      const icon = (target as HTMLHtmlElement).closest(`.${listClass.child}`);
+      const icon = (target as HTMLHtmlElement).closest(`.${ListClass.child}`);
 
       if (!listItem || !icon) return;
 
       const id = listItem.dataset.id;
 
-      if (icon.classList.contains(listClass.add)) return addHandler(id);
-      if (icon.classList.contains(listClass.delete)) return removeHandler(id);
-      if (icon.classList.contains(listClass.edit)) return editHandler(id);
-      if (icon.classList.contains(listClass.toggle)) return toggleHandler(id);
+      if (icon.classList.contains(ListClass.add)) return addHandler(id);
+      if (icon.classList.contains(ListClass.delete)) return removeHandler(id);
+      if (icon.classList.contains(ListClass.edit)) return editHandler(id);
+      if (icon.classList.contains(ListClass.toggle)) return toggleHandler(id);
     });
   }
 }
