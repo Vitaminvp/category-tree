@@ -1,5 +1,5 @@
-import * as model from '../model';
-import { treeView, emptyListView } from '../views';
+import * as model from "../model";
+import { treeView, emptyListView } from "../views";
 import {
   controlRender,
   controlAdd,
@@ -7,13 +7,9 @@ import {
   controlToggle,
   controlEdit,
   controlAddFirst,
-} from './index';
+} from "./index";
 
-if (module.hot) {
-  module.hot.accept();
-}
-
-export const init = function () {
+export const init = (): void => {
   model.manageStorage();
   treeView.addRenderHandler(controlRender);
   emptyListView.addClickHandler(controlAddFirst);

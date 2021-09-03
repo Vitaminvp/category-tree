@@ -1,19 +1,13 @@
-import icons from 'url:../../img/icons.svg';
-import View from './view';
-
-const listClass = {
-  child: 'list-item-child',
-  delete: 'list-item-delete',
-  add: 'list-item-add',
-  edit: 'list-item-edit',
-  toggle: 'list-item-toggle',
-  item: 'list-item',
-};
+import icons from "../../img/icons.svg";
+import View from "./view";
+import { ArrowFn, Category } from "../types";
+import { listClass } from "../config";
+import { isZeroLength } from "../helpers";
 
 class TreeView extends View {
-  _parentElement = document.getElementById('root');
+  _parentElement = document.getElementById("root") as HTMLHtmlElement;
 
-  _generateListContent(name) {
+  private _generateListContent(name: string): string {
     return `
       <span class="${listClass.child} ${listClass.toggle}">${name}</span>
       <span title="Delete item" class="${listClass.child} ${listClass.delete}">
@@ -34,14 +28,16 @@ class TreeView extends View {
     `;
   }
 
-  _generateMarkup(data = []) {
+  _generateMarkup(data: Category[] = []): string {
     return `
       <ul class="list">
         ${data
-          .map(({ children, id, name, closed }) => {
-            if (children && children.length) {
+          .map(({ children, id, name, closed }: Category) => {
+            if (children && !isZeroLength(children)) {
               return `
-                <li class="list-item has-children ${closed ? 'closed' : ''}" data-id="${id}">
+                <li class="list-item has-children ${
+                  closed ? "closed" : ""
+                }" data-id="${id}">
                   ${this._generateListContent(name)}
                   ${this._generateMarkup(children)}
                 </li>`;
@@ -52,20 +48,27 @@ class TreeView extends View {
                 ${this._generateListContent(name)}
               </li>`;
           })
-          .join('')}
+          .join("")}
 
       </ul>
     `;
   }
 
-  addRenderHandler(handler) {
-    window.addEventListener('load', handler);
+  addRenderHandler(handler: ArrowFn): void {
+    window.addEventListener("load", handler);
   }
 
-  addClickHandler(addHandler, removeHandler, editHandler, toggleHandler) {
-    this._parentElement.addEventListener('click', function (e) {
-      const listItem = e.target.closest(`.${listClass.item}`);
-      const icon = e.target.closest(`.${listClass.child}`);
+  addClickHandler(
+    addHandler: Function,
+    removeHandler: Function,
+    editHandler: Function,
+    toggleHandler: Function,
+  ): void {
+    this._parentElement.addEventListener("click", ({ target }: MouseEvent) => {
+      const listItem = (target as HTMLHtmlElement).closest(
+        `.${listClass.item}`,
+      ) as HTMLHtmlElement;
+      const icon = (target as HTMLHtmlElement).closest(`.${listClass.child}`);
 
       if (!listItem || !icon) return;
 

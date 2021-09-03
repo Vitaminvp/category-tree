@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap');
+
 $color-primary: #79ff00;
 $color-secondary: #e83b3b;
 $color-third: #5779e8;
@@ -46,7 +48,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   color: $color-grey-dark-1;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
   font-weight: 400;
   line-height: 1.6;
   min-height: 100vh;
