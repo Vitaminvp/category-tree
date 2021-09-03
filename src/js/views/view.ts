@@ -42,19 +42,20 @@ export default abstract class View {
       (this._parentElement as HTMLHtmlElement).querySelectorAll("*"),
     ) as HTMLLIElement[];
 
-    newElements.forEach((newEl, i) => {
+    for (let i = 0; i < newElements.length; i++) {
       const curEl = curElements[i];
+      const newEl = newElements[i];
 
-      if (!newEl.isEqualNode(curEl) && newEl?.firstChild?.nodeValue?.trim() !== "") {
+      if (newEl.isEqualNode(curEl)) continue;
+
+      if (newEl.firstChild?.nodeValue?.trim() !== "") {
         curEl.textContent = newEl.textContent;
       }
 
-      if (!newEl.isEqualNode(curEl)) {
-        Array.from(newEl.attributes).forEach(attr =>
-          curEl.setAttribute(attr.name, attr.value),
-        );
-      }
-    });
+      Array.from(newEl.attributes).forEach(attr =>
+        curEl.setAttribute(attr.name, attr.value),
+      );
+    }
   }
 
   remove(id: string, handler: ArrowFn): void {

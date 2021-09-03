@@ -12,7 +12,7 @@ export const KEYS = {
 };
 export const DEL_AMOUNT = 1;
 
-export enum listClass {
+export enum ListClass {
   child = "list-item-child",
   delete = "list-item-delete",
   add = "list-item-add",

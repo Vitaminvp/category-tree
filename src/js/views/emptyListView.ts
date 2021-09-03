@@ -3,7 +3,7 @@ import icons from "../../img/icons.svg";
 import { ArrowFn } from "../types";
 
 class EmptyListView extends View {
-  _parentElement: HTMLElement = document.getElementById("create")!;
+  _parentElement = document.getElementById("create") as HTMLElement;
 
   clear = this._clear;
 
