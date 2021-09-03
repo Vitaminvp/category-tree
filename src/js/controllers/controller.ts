@@ -9,12 +9,6 @@ import {
   controlAddFirst,
 } from "./index";
 
-// @ts-ignore
-if (module.hot) {
-  // @ts-ignore
-  module.hot.accept();
-}
-
 export const init = (): void => {
   model.manageStorage();
   treeView.addRenderHandler(controlRender);

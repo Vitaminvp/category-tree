@@ -37,7 +37,7 @@ export const saveToStorage = <T>(key: string, value: T): void => {
   }
 };
 
-export const getFromStorage = (key: string): void => {
+export const getFromStorage = <T>(key: string): T | void => {
   try {
     const result = localStorage.getItem(key) as string;
 

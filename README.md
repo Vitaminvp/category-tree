@@ -10,6 +10,10 @@
 
 - add **jest** to project
 
+## Typings
+
+- add TypeScript version (git branch typeScript)
+
 ## Deployment
 
 - Used pre-commit git hook to generate new Service Worker before each commit.

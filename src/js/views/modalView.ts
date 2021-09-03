@@ -4,11 +4,11 @@ import { KEYS } from "../config";
 import { ModalMarkUp } from "../types";
 
 class ModalView extends View {
-  _parentElement = document.querySelector(".modal") as HTMLFormElement;
+  readonly _parentElement = document.querySelector(".modal") as HTMLFormElement;
 
-  _window = document.querySelector(".modal-window") as HTMLHtmlElement;
-  _overlay = document.querySelector(".overlay") as HTMLHtmlElement;
-  _btnClose = document.querySelector(".btn--close-modal") as HTMLHtmlElement;
+  readonly _window = document.querySelector(".modal-window") as HTMLHtmlElement;
+  readonly _overlay = document.querySelector(".overlay") as HTMLHtmlElement;
+  readonly _btnClose = document.querySelector(".btn--close-modal") as HTMLHtmlElement;
 
   private _options = {} as ModalMarkUp;
 
@@ -27,13 +27,13 @@ class ModalView extends View {
   };
 
   private _openModal = (): void => {
-    this._overlay?.classList.remove("hidden");
-    this._window?.classList.remove("hidden");
+    this._overlay.classList.remove("hidden");
+    this._window.classList.remove("hidden");
   };
 
   private _closeModal = (): void => {
-    this._overlay?.classList.add("hidden");
-    this._window?.classList.add("hidden");
+    this._overlay.classList.add("hidden");
+    this._window.classList.add("hidden");
     this._removeKeyPressHandler();
   };
 
@@ -81,7 +81,7 @@ class ModalView extends View {
   };
 
   private _submitHandler = (): void => {
-    this._parentElement?.addEventListener("submit", e => {
+    this._parentElement.addEventListener("submit", e => {
       e.preventDefault();
 
       this._handleSubmit();

@@ -1,4 +1,9 @@
 {
   "presets": ["@babel/preset-env", "@babel/preset-flow"],
-  "plugins": ["@babel/plugin-syntax-flow"]
+  "plugins": ["@babel/plugin-syntax-flow"],
+  "env": {
+    "test": {
+      "presets": ["@babel/preset-typescript"]
+    }
+  }
 }
