@@ -37,6 +37,10 @@ export let state = [
                 id: "6",
                 name: "2-2-2 Category item",
               },
+              {
+                id: "7",
+                name: "2-2-3 Category item",
+              },
             ],
           },
         ],
